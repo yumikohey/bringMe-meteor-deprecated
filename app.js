@@ -27,7 +27,6 @@ if (Meteor.isClient) {
 
     angular.module('bringMe').controller('registerCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
         $scope.users = $meteor.collection(Users);
-        $scope.users.save({name:'hi'});
         console.log($scope.users);
       }]);
 }
