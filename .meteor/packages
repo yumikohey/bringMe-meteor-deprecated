@@ -20,3 +20,8 @@ random
 ejson
 spacebars
 check
+npm-bcrypt
+meteorhacks:npm
+
+
+npm-container

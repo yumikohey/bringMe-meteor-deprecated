@@ -12,29 +12,28 @@ if (Meteor.isClient) {
     	  })
           .state('register', {
             url: '/register',
-            templateUrl: 'client/register.ng.html'
+            templateUrl: 'client/register.ng.html',
+            controller: 'registerCtrl'
           })
           .state('home', {
             url: '/home',
             templateUrl: 'client/index.ng.html',
-            controller: 'registerCtrl'
           })
 
     	$urlRouterProvider.otherwise("/parties");
     }]);
 
     angular.module('bringMe').controller('registerCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
-        var user = {
-          email: 'test@abc.com',
-          username: 'test',
-          password: 'abc123'
+        $scope.register = function(user){
+          Meteor.call('userRegister', user, function(err, result) {
+            if(!err){
+                console.log("Congratulations! You successfully created an account with BringMe!");
+              // $scope.users = $meteor.collection(Users).subscribe('bringme_users');
+              // console.log($scope.users);
+            }else{
+              console.log(err);
+            }
+          });
         }
-        Meteor.call('userRegister', user, function(err, result) {
-          if(!err){
-            $scope.users = $meteor.collection(Users).subscribe('bringme_users');
-          }else{
-            console.log(err);
-          }
-        });
       }]);
 }
