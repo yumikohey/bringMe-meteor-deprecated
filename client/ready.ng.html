@@ -1,0 +1,39 @@
+<ion-view view-title="Discover" class="discover-page">
+	<ion-content scroll="false">
+
+		<div class="list" >
+
+			<div class="item">
+				<h2>{{users}} <i class="ion-loading-c"></i></h2>
+				<p>Bye</p>	
+			</div>
+
+			<div class="item tabs tabs-secondary tabs-icon-left">
+				<a class="tab-item">
+					<i class="icon ion-close">
+						Skip
+					</i>
+				</a>
+
+				<a class="tab-item">
+					<i class="icon ion-heart">
+						Favorite
+					</i>
+				</a>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+	<!-- Discover Tab -->
+	<ion-tab title="Discover" icon-off="ion-radio-waves" icon-on="ion-radio-waves" href="#">
+		<ion-nav-view name="tab-discover"></ion-nav-view>
+	</ion-tab>
+
+	<!-- Favorites Tab -->
+	<ion-tab title="Favorites" icon-off="ion-music-note" icon-on="ion-music-note" href="#">
+	    <ion-nav-view name="tab-favorites"></ion-nav-view>
+	</ion-tab>
+
+</ion-tabs>

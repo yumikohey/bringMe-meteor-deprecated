@@ -21,7 +21,7 @@ if (Meteor.isClient) {
             templateUrl: 'client/index.ng.html',
           })
 
-    	$urlRouterProvider.otherwise("/parties");
+    	$urlRouterProvider.otherwise("/home");
     }]);
 
     angular.module('bringMe').controller('registerCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
@@ -29,8 +29,11 @@ if (Meteor.isClient) {
           Meteor.call('userRegister', user, function(err, result) {
             if(!err){
                 console.log("Congratulations! You successfully created an account with BringMe!");
+                $scope.success = true;
+                $scope.failed = "";
             }else{
-              console.log(err);
+                $scope.success = false;
+                $scope.failed = err;
             }
           });
         }
@@ -45,13 +48,15 @@ if (Meteor.isClient) {
             Meteor.call('userLogin', user.password, hash, function(err, result) {
               if(!err){
                   console.log("Thanks for returning");
+                  $scope.success = true;
+                  $scope.failed = "";
               }else{
-                  console.log(err);
+                  $scope.success = false;
+                  $scope.failed = err;
               }
             });
             subscriptionHandle.stop();
           })
-
         }
       }]);
 }

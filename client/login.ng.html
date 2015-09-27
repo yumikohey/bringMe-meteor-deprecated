@@ -9,5 +9,7 @@
 	          </label>
 	      </div>
 	      <button class="button button-block button-calm" ng-click="login(user)">Login</button>
+	       <div ng-show="success"> Successful logined </div>
+	       <div ng-show="failed">{{failed}}</div>
 	</ion-content>
 </ion-view>
