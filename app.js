@@ -26,28 +26,29 @@ if (Meteor.isClient) {
 
     angular.module('bringMe').controller('registerCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
         $scope.register = function(user){
-          Meteor.call('userRegister', user, function(err, result) {
-            if(!err){
-                console.log("Congratulations! You successfully created an account with BringMe!");
+            Accounts.createUser({email:user.email, password:user.password}, function(err){
+              if(err){
+                $scope.failed = "Email has been registered";
+                $scope.success = false;
+              } else {
                 $scope.success = true;
                 $scope.failed = "";
-            }else{
-                $scope.success = false;
-                $scope.failed = err;
-            }
-          });
+              }
+            });   
         }
       }]);
 
     angular.module('bringMe').controller('loginCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
         $scope.login = function(user){
-          // $meteor.subscribe('bringme_users', user.username)
-          // .then(function(subscriptionHandle){
-          //   var returnUser = $meteor.collection(Users);
-          //   var hash = returnUser[0].password;
-
-          //   subscriptionHandle.stop();
-          // })
+          Meteor.loginWithPassword(user.username, user.password, function(err){
+            if(err){
+              $scope.failed = "Incorrect email / password";
+              $scope.success = false;
+            } else {
+              $scope.success = true;
+              $scope.failed = "";
+            }
+          });
         }
       }]);
 }

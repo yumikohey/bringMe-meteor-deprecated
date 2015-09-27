@@ -23,3 +23,5 @@ npm-bcrypt
 
 
 accounts-password
+accounts-ui
+urigo:angular-blaze-template
