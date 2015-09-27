@@ -18,7 +18,7 @@ if (Meteor.isClient) {
           })
           .state('home', {
             url: '/home',
-            templateUrl: 'client/index.ng.html',
+            templateUrl: 'client/index.html',
           })
 
     	$urlRouterProvider.otherwise("/home");
