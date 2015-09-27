@@ -41,22 +41,13 @@ if (Meteor.isClient) {
 
     angular.module('bringMe').controller('loginCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
         $scope.login = function(user){
-          $meteor.subscribe('bringme_users', user.username)
-          .then(function(subscriptionHandle){
-            var returnUser = $meteor.collection(Users);
-            var hash = returnUser[0].password;
-            Meteor.call('userLogin', user.password, hash, function(err, result) {
-              if(!err){
-                  console.log("Thanks for returning");
-                  $scope.success = true;
-                  $scope.failed = "";
-              }else{
-                  $scope.success = false;
-                  $scope.failed = err;
-              }
-            });
-            subscriptionHandle.stop();
-          })
+          // $meteor.subscribe('bringme_users', user.username)
+          // .then(function(subscriptionHandle){
+          //   var returnUser = $meteor.collection(Users);
+          //   var hash = returnUser[0].password;
+
+          //   subscriptionHandle.stop();
+          // })
         }
       }]);
 }

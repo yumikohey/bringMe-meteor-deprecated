@@ -17,11 +17,9 @@ tracker
 logging
 reload
 random
-ejson
 spacebars
 check
 npm-bcrypt
-meteorhacks:npm
 
 
-npm-container
+accounts-password
