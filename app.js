@@ -8,7 +8,8 @@ if (Meteor.isClient) {
     	$stateProvider
     	  .state('login', {
     	  	url: '/login',
-    	  	templateUrl: 'client/login.ng.html'
+    	  	templateUrl: 'client/login.ng.html',
+            controller: 'loginCtrl'
     	  })
           .state('register', {
             url: '/register',
@@ -28,12 +29,29 @@ if (Meteor.isClient) {
           Meteor.call('userRegister', user, function(err, result) {
             if(!err){
                 console.log("Congratulations! You successfully created an account with BringMe!");
-              // $scope.users = $meteor.collection(Users).subscribe('bringme_users');
-              // console.log($scope.users);
             }else{
               console.log(err);
             }
           });
+        }
+      }]);
+
+    angular.module('bringMe').controller('loginCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
+        $scope.login = function(user){
+          $meteor.subscribe('bringme_users', user.username)
+          .then(function(subscriptionHandle){
+            var returnUser = $meteor.collection(Users);
+            var hash = returnUser[0].password;
+            Meteor.call('userLogin', user.password, hash, function(err, result) {
+              if(!err){
+                  console.log("Thanks for returning");
+              }else{
+                  console.log(err);
+              }
+            });
+            subscriptionHandle.stop();
+          })
+
         }
       }]);
 }

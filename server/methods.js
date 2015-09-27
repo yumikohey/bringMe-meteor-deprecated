@@ -55,10 +55,19 @@ Meteor.methods({
 				throw new Meteor.Error(errors[i].error, errors[i].reason);
 			}
 		}
-		
-		// Meteor.call('checkPassword', user.password, encryptedPw, function(err, result){
-		// 	console.log(result);
-		// });
-		
+				
+	},
+	'userLogin':function(inputPassword, encryptedPassword){
+		var errors = [];
+		Meteor.call('checkPassword', inputPassword, encryptedPassword, function(err, result){
+			if(!result){
+				errors.push(Meteor.Error("incorrect-password", "password doesn't match"));
+			}
+		});
+		if (errors.length > 0){
+			for(var i=0; i < errors.length; i++){
+				throw new Meteor.Error(errors[i].error, errors[i].reason);
+			}
+		}
 	}
 });
