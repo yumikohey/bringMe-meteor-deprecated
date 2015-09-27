@@ -1,5 +1,3 @@
-Users = new Mongo.Collection("bringme_users");
-
 if (Meteor.isClient) {
 	angular.module('bringMe', ['angular-meteor', 'ui.router', 'ionic']);
 
@@ -26,7 +24,17 @@ if (Meteor.isClient) {
     }]);
 
     angular.module('bringMe').controller('registerCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
-        $scope.users = $meteor.collection(Users);
-        console.log($scope.users);
+        var user = {
+          email: 'test@abc.com',
+          username: 'test',
+          password: 'abc123'
+        }
+        Meteor.call('userRegister', user, function(err, result) {
+          if(!err){
+            $scope.users = $meteor.collection(Users).subscribe('bringme_users');
+          }else{
+            console.log(err);
+          }
+        });
       }]);
 }
