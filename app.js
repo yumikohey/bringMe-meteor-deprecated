@@ -51,4 +51,14 @@ if (Meteor.isClient) {
           });
         }
       }]);
+    
+    if (Meteor.isCordova) {
+      angular.element(document).on('deviceready', bootstrapTheApp);
+    } else {
+      bootstrapTheApp();
+    }
+}
+
+function bootstrapTheApp() {
+  angular.bootstrap(document, ['bringMe']);
 }
